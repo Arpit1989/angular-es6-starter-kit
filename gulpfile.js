@@ -9,15 +9,15 @@ var gulp = require('gulp'),
     vinylSourceStream = require('vinyl-source-stream'),
     vinylBuffer = require('vinyl-buffer'),
     util = require('gulp-util'),
-    all = require('gulp-load-plugins');
+    jade = require('gulp-jade');
 
-// Load all gulp plugins into the plugins object.
-var plugins = all();
+// load all gulp plugins into the plugins object
+var plugins = require('gulp-load-plugins')();
 
-console.log(all().name);
-
+// set paths and glob patterns 
 var src = {
     html: 'src/**/*.html',
+    jade: 'src/**/*.jade',
     libs: 'src/libs/**',
     scripts: {
         all: 'src/scripts/**/*.js',
@@ -25,8 +25,10 @@ var src = {
     }
 };
 
+// build folder 
 var build = 'build/';
 
+// destination path
 var out = {
     libs: build + 'libs/',
     scripts: {
@@ -35,13 +37,8 @@ var out = {
     }
 };
 
-gulp.task('html', function() {
-    return gulp.src(src.html)
-        .pipe(gulp.dest(build))
-        //.pipe(browserSync.reload);
-});
 
-/* Compile all script files into one output minified JS file. */
+// compile all javascript files into one output minified JS file. 
 gulp.task('scripts',  function() {
 
     var sources = browserify({
@@ -52,8 +49,6 @@ gulp.task('scripts',  function() {
             // You can configure babel here!
             // https://babeljs.io/docs/usage/options/
         }));
-
-
 
     return sources.bundle()
         .pipe(vinylSourceStream(out.scripts.file))
@@ -67,13 +62,10 @@ gulp.task('scripts',  function() {
             includeContent: true
         }))
         .pipe(gulp.dest(out.scripts.folder));
-
-
-
 });
 
+// serve on default port 3002 //
 gulp.task('serve', ['build', 'watch-all'], function() {
-
     browserSync.init({
         server: {
             baseDir: build
@@ -81,16 +73,27 @@ gulp.task('serve', ['build', 'watch-all'], function() {
     });
 });
 
+// watch files //
 gulp.task('watch-all', function() {
     gulp.watch(src.html, ['reload']);
+    gulp.watch(src.jade, ['reload']);
     gulp.watch(src.scripts.all, ['reload']);
 });
 
+// build task //
+gulp.task('build', ['scripts', 'jade']);
 
-gulp.task('build', ['scripts', 'html']);
+// set default task as serve //
 gulp.task('default', ['serve']);
 
+// reload browsers //
+gulp.task('reload',['jade', 'scripts'],browserSync.reload);
 
-gulp.task('reload',['scripts', 'html'],browserSync.reload);
+// jade to html conversion //
+gulp.task('jade', function() {
+    gulp.src(src.jade)
+        .pipe(jade({}))
+        .pipe(gulp.dest(build))
+});
 
 

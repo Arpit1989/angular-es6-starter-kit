@@ -1,0 +1,8 @@
+doctype html
+html(lang="de", ng-app="starterApp")
+    head
+        title= 'Hello World'
+        script(src='scripts/app.min.js')
+    body
+        div(ng-controller='AboutCtrl')
+            span(ng-bind='name')
