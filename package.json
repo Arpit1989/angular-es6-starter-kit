@@ -1,0 +1,40 @@
+{
+  "name": "angular-es6-starter-kit",
+  "version": "1.0.0",
+  "description": "A starter kit for playing with AngularJS, ES6, Gulp and Browerify.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gurpreet-hanjra/angular-es6-starter-kit.git"
+  },
+  "keywords": [
+    "AngularJS",
+    "ES6",
+    "Gulp",
+    "NPM",
+    "Browserify"
+  ],
+  "author": "Gurpreet Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gurpreet-hanjra/angular-es6-starter-kit/issues"
+  },
+  "homepage": "https://github.com/gurpreet-hanjra/angular-es6-starter-kit#readme",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "babelify": "^7.2.0",
+    "browser-sync": "^2.10.0",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-ng-annotate": "^1.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {}
+}
