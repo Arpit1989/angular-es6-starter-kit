@@ -15,3 +15,9 @@ A basic AngularJS starter kit with basic building blocks and comprised of follow
 6) Jasmine (Unit test framework)
 
 and more
+
+# How to run
+
+`npm install`
+
+`gulp`
